@@ -7,7 +7,7 @@ const User = require("../models/user");
 authRouter.post('/signup', async (req, res) => {
 
     const {firstName,lastName,emailId,password} = req.body;
-    console.log(req.body);
+   //  console.log(req.body);
     //const users = new User(req.body);
    
     try {
@@ -50,13 +50,18 @@ authRouter.post('/signup', async (req, res) => {
          // res.cookie("token","qwertyuiopasdfghjklzxcvbnm")
          res.cookie("token",token,{ expires: new Date(Date.now() + 900000)});
          res.status(200).send("Welcome");
-         console.log(token);
+         // console.log(token);
       }
    }
       // res.send(emailFound);
    } catch (error) {
      res.status(404).send(error.message)
    }
+})
+
+authRouter.get("/logout",(req,res)=>{
+   res.cookie("token", null, {expires: new Date(Date.now())})
+   res.send("Logout successful ")
 })
 
  module.exports = authRouter;

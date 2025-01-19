@@ -62,6 +62,13 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
+//compound index
+//it will run fast to find on the basis of fromUserId
+//ex - userSchema.find("Amar") 
+//not fast for userSchema.find({firstName: "Amar" , lastName:"kumar"})
+// for this we have to write (1 means ascending order and -1 means decending  order)
+userSchema.index({firstName:1, lastName:-1})
+userSchema.index({firstName: 1});
 userSchema.methods.passwordValidate = async function (userInputPassword) {
     const user = this;
     const hashPassword = user.password;

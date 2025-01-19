@@ -14,9 +14,11 @@ const userAuth = async (req, res, next) => {
             throw new Error("User does not exist ");
         }
         req.userProfile = userProfile;
+        
     }
     catch (err) {
         res.status(400).send(err.message)
+        return;
     }
     next();
 }

@@ -147,7 +147,7 @@ app.get('/allUser', async (req,res)=>{
    
 })
 
-app.patch("/feed", async (req,res)=>{
+app.patch("/feeds", async (req,res)=>{
    try {
       // const userId =  req.params?.userId;
       const data = req.body
