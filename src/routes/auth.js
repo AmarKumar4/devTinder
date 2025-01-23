@@ -49,7 +49,7 @@ authRouter.post('/signup', async (req, res) => {
          const token = await userFound.getJwt();
          // res.cookie("token","qwertyuiopasdfghjklzxcvbnm")
          res.cookie("token",token,{ expires: new Date(Date.now() + 900000)});
-         res.status(200).send("Welcome");
+         res.status(200).send(userFound);
          // console.log(token);
       }
    }
