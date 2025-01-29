@@ -13,10 +13,26 @@ const profileRouter = require("./routes/profile")
 const requestRouter = require("./routes/request");
 const userRouter = require('./routes/user');
 // it  will run on every req 
+// app.options('*', cors()); // This will handle preflight (OPTIONS) requests for all routes
+const allowedOrigin = 'http://localhost:5173'; // Your frontend URL
+
 app.use(cors({
-   origin:"http://localhost:5173/",
-   credentials:true,
-}))
+    origin: allowedOrigin,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // Include POST and PATCH
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+    credentials: true, // Allow cookies or credentials
+}));
+// app.use(cors({
+//    origin:"http://localhost:5173",
+//    credentials:true,
+// }))
+app.options('*', (req, res) => {
+   res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS'); // Include all methods here
+   res.header('Access-Control-Allow-Origin', allowedOrigin); // Match the origin
+   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+   res.sendStatus(204); // No content
+});
 app.use(express.json())
 app.use(cookieParser()); 
 app.use("/", authRouter);

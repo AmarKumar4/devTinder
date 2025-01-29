@@ -11,10 +11,11 @@ userRouter.get("/user/requests/received", userAuth, async (req, res) => {
         const data = await ConnectionRequest.find({
             toUserId: loggedInUser._id,
             status: "interested"
-        }).populate("fromUserId", ["firstName", "lastName"]).populate("toUserId", "firstName lastName")
+        }).populate("fromUserId", ["_id","photoUrl","about","age","gender","firstName", "lastName"]).populate("toUserId", "firstName lastName")
         // console.log(loggedInUser._id)
         if (data) {
             res.send(data)
+            console.log(data)
         }
         else {
             res.send("no pending req")
@@ -96,7 +97,8 @@ const skip = (page-1)*limit;
                 {_id: {$ne: loggedInUser._id}},
             ] 
         }).select(USER_SAFE_DATA).limit(page).skip(skip)
-        res.send(freshFeedUser)
+        // res.json({message: `user with data `,dataAmar:freshFeedUser})
+        res.send(freshFeedUser).status(200)
         // const hideUserFromFeed =  userData.map(async (req)=>{
         //     // console.log(req._id);
         //     console.log("Hi " +req._id.toString());

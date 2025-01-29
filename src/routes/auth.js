@@ -41,7 +41,7 @@ authRouter.post('/signup', async (req, res) => {
       const userPassword = userFound.password;
       const isPasswordValidate = await userFound.passwordValidate(password);
       if(!isPasswordValidate){
-         throw new Error("wrong password")
+         throw new Error("wrong Credentials")
       }
       else{
          // this code is also code but as per the industry and clearity will write in the schema model
@@ -55,7 +55,7 @@ authRouter.post('/signup', async (req, res) => {
    }
       // res.send(emailFound);
    } catch (error) {
-     res.status(404).send(error.message)
+     res.status(404).send("Error: "+error.message)
    }
 })
 

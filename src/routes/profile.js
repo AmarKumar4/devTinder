@@ -19,7 +19,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
       // }
       res.send(req.userProfile)
    } catch (err) {
-      res.status(400).send(err.message);
+      res.status(401).send(err.message);
    }
 
 })
