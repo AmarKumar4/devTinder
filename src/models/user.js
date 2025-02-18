@@ -81,7 +81,7 @@ userSchema.methods.passwordValidate = async function (userInputPassword) {
 
 userSchema.methods.getJwt = async function () {
     const user = this;
-    const token = await jwt.sign({ _id: user._id }, "Amar@Sarita", { expiresIn: 60 * 60 })
+    const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: 60 * 60 })
     return token;
 }
 const User = mongoose.model("User", userSchema);

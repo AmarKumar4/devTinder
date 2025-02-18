@@ -12,10 +12,11 @@ const authRouter = require("./routes/auth")
 const profileRouter = require("./routes/profile")
 const requestRouter = require("./routes/request");
 const userRouter = require('./routes/user');
+require('dotenv').config();
 // it  will run on every req 
 // app.options('*', cors()); // This will handle preflight (OPTIONS) requests for all routes
 const allowedOrigin = 'http://localhost:5173'; // Your frontend URL
-
+console.log(process.env.DB_CONNECTION_STRING)
 app.use(cors({
     origin: allowedOrigin,
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // Include POST and PATCH
